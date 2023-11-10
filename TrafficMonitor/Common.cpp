@@ -159,13 +159,18 @@ CString CCommon::DataSizeToString(unsigned long long size, const PublicSettingDa
         {
             value_str.Format(_T("%.1f"), size / 1024.0f / 1024.0f);
             if (!cfg.hide_unit)
-                unit_str = _T("M");
+                unit_str = _T("m");
+        }
+        else if (size < 1024 * 1024 * 10.24f)     //10MB以下保留2位小数
+        {
+            value_str.Format(_T("%.2f"), size / 1024.0f / 1024.0f);
+            unit_str = _T("M");
         }
         else
         {
-            value_str.Format(_T("%.2f"), size / 1024.0f / 1024.0f);
+            value_str.Format(_T("%.1f"), size / 1024.0f / 1024.0f);
             if (!cfg.hide_unit)
-                unit_str = _T("MB");
+                unit_str = _T("M");
         }
         break;
     }
@@ -193,8 +198,10 @@ CString CCommon::DataSizeToString(unsigned long long size, bool with_space)
         str.Format(_T("%.1f KB"), size / 1024.0);
     else if (size < 1024 * 1024 * 1024)     //1GB以下以MB为单位，保留2位小数
         str.Format(_T("%.2f MB"), size / 1024.0 / 1024.0);
+    else if (size < 1024ll * 1024 * 1024 * 10.24f)
+        str.Format(_T("%.2f GB"), size / 1024.0 / 1024.0 / 1024.0);//10GB以下以保留2位小数
     else if (size < 1024ll * 1024 * 1024 * 1024)
-        str.Format(_T("%.2f GB"), size / 1024.0 / 1024.0 / 1024.0);
+        str.Format(_T("%.1f GB"), size / 1024.0 / 1024.0 / 1024.0);
     else
         str.Format(_T("%.2f TB"), size / 1024.0 / 1024.0 / 1024.0 / 1024.0);
     if (!with_space)
@@ -207,6 +214,8 @@ CString CCommon::TemperatureToString(float temperature, const PublicSettingData&
     CString str_val;
     if (temperature <= 0)
         str_val = _T("--");
+    else if (temperature < 10)
+        str_val.Format(_T("0%d"), static_cast<int>(temperature));
     else
         str_val.Format(_T("%d"), static_cast<int>(temperature));
     if (cfg.separate_value_unit_with_space)
@@ -220,6 +229,8 @@ CString CCommon::UsageToString(int usage, const PublicSettingData& cfg)
     CString str_val;
     if (usage < 0)
         str_val = _T("--");
+    else if (usage < 10)
+        str_val.Format(_T("0%d"), usage);
     else
         str_val.Format(_T("%d"), usage);
     if (!cfg.hide_percent)
@@ -237,7 +248,7 @@ CString CCommon::FreqToString(float freq, const PublicSettingData& cfg)
     if (freq < 0)
         str_val = _T("--");
     else
-        str_val.Format(_T("%.2f GHz"), freq);
+        str_val.Format(_T("%.1fGHz"), freq);
     return str_val;
 }
 //CString CCommon::KBytesToString(unsigned int kb_size)

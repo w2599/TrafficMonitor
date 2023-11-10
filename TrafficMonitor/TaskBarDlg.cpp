@@ -385,7 +385,7 @@ void CTaskBarDlg::DrawDisplayItem(IDrawCommon& drawer, DisplayItem type, CRect r
         if (theApp.m_taskbar_data.hide_unit && theApp.m_taskbar_data.speed_unit != SpeedUnit::AUTO)
             format_str = _T("%s");
         else
-            format_str = _T("%s/s");
+            format_str = _T("%s");
         CString str_in_speed = CCommon::DataSizeToString(theApp.m_in_speed, theApp.m_taskbar_data);
         CString str_out_speed = CCommon::DataSizeToString(theApp.m_out_speed, theApp.m_taskbar_data);
         CString str_total_speed = CCommon::DataSizeToString(theApp.m_in_speed + theApp.m_out_speed, theApp.m_taskbar_data);
@@ -1000,14 +1000,14 @@ void CTaskBarDlg::CalculateWindowSize()
         if (hide_unit)
             sample_str.Format(_T("%s."), digits.c_str());
         else
-            sample_str.Format(_T("%s.M/s"), digits.c_str());
+            sample_str.Format(_T("%s.M"), digits.c_str());
     }
     else
     {
         if (hide_unit)
-            sample_str.Format(_T("%s.8"), digits.c_str());
+            sample_str.Format(_T("%s."), digits.c_str());
         else
-            sample_str.Format(_T("%s.8MB/s"), digits.c_str());
+            sample_str.Format(_T("%s.M"), digits.c_str());
     }
     if (!hide_unit && theApp.m_taskbar_data.separate_value_unit_with_space)
         sample_str += _T(' ');
@@ -1038,9 +1038,9 @@ void CTaskBarDlg::CalculateWindowSize()
     if (theApp.m_taskbar_data.memory_display == MemoryDisplay::MEMORY_USED || theApp.m_taskbar_data.memory_display == MemoryDisplay::MEMORY_AVAILABLE)
     {
         if (theApp.m_taskbar_data.separate_value_unit_with_space)
-            str = _T("19.99 GB");
+            str = _T("19.9 G");
         else
-            str = _T("19.99GB");
+            str = _T("19.9G");
         memory_width = m_pDC->GetTextExtent(str).cx;
     }
     item_widths[TDI_CPU].value_width = value_width;
@@ -1048,7 +1048,7 @@ void CTaskBarDlg::CalculateWindowSize()
     item_widths[TDI_GPU_USAGE].value_width = value_width;
     item_widths[TDI_HDD_USAGE].value_width = value_width;
 
-    item_widths[TDI_CPU_FREQ].value_width = m_pDC->GetTextExtent(_T("1.00 GHz")).cx;
+    item_widths[TDI_CPU_FREQ].value_width = m_pDC->GetTextExtent(_T("1.0GHz")).cx;
 
     //计算温度显示的宽度
     if (theApp.m_taskbar_data.separate_value_unit_with_space)

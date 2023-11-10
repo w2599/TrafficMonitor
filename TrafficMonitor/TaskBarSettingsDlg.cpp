@@ -74,13 +74,13 @@ void CTaskBarSettingsDlg::IniUnitCombo()
     m_unit_combo.AddString(CCommon::LoadText(IDS_AUTO));
     if (m_data.unit_byte)
     {
-        m_unit_combo.AddString(CCommon::LoadText(IDS_FIXED_AS, _T(" KB/s")));
-        m_unit_combo.AddString(CCommon::LoadText(IDS_FIXED_AS, _T(" MB/s")));
+        m_unit_combo.AddString(CCommon::LoadText(IDS_FIXED_AS, _T(" K")));
+        m_unit_combo.AddString(CCommon::LoadText(IDS_FIXED_AS, _T(" M")));
     }
     else
     {
-        m_unit_combo.AddString(CCommon::LoadText(IDS_FIXED_AS, _T(" Kb/s")));
-        m_unit_combo.AddString(CCommon::LoadText(IDS_FIXED_AS, _T(" Mb/s")));
+        m_unit_combo.AddString(CCommon::LoadText(IDS_FIXED_AS, _T(" k")));
+        m_unit_combo.AddString(CCommon::LoadText(IDS_FIXED_AS, _T(" m")));
     }
     m_unit_combo.SetCurSel(static_cast<int>(m_data.speed_unit));
 }

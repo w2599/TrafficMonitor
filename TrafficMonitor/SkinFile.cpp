@@ -497,9 +497,9 @@ void CSkinFile::DrawInfo(CDC* pDC, bool show_more_info, CFont& font)
     CString total_speed = CCommon::DataSizeToString(theApp.m_in_speed + theApp.m_out_speed, theApp.m_main_wnd_data);
     if (!theApp.m_main_wnd_data.hide_unit || theApp.m_main_wnd_data.speed_unit == SpeedUnit::AUTO)
     {
-        in_speed += _T("/s");
-        out_speed += _T("/s");
-        total_speed += _T("/s");
+        // in_speed += _T("/s");
+        // out_speed += _T("/s");
+        // total_speed += _T("/s");
     }
     map_str[TDI_UP].value = out_speed.GetString();
     map_str[TDI_DOWN].value = in_speed.GetString();
