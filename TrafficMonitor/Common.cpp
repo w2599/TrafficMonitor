@@ -161,7 +161,7 @@ CString CCommon::DataSizeToString(unsigned long long size, const PublicSettingDa
             if (!cfg.hide_unit)
                 unit_str = _T("m");
         }
-        else if (size < 1024 * 1024 * 10.24f)     //10MB以下保留2位小数
+        else if (size < 1024 * 1024 * 10)     //10MB以下保留2位小数
         {
             value_str.Format(_T("%.2f"), size / 1024.0f / 1024.0f);
             unit_str = _T("M");
